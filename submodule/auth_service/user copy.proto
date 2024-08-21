@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option go_package = "genproto/auth";
+
+package auth;
+
+
+service UserService{
+    rpc GetProfile(GetById) returns (UserRes);
+    rpc EditProfile(UserRes) returns (UserRes);
+    rpc ChangePassword(ChangePasswordReq) returns (Empty);
+    rpc GetSetting(GetById) returns (Setting);
+    rpc EditSetting(SettingReq) returns (Empty);
+    rpc DeleteUser(GetById) returns (Empty);
+}
+
+message GetById{
+    string Id = 1;
+}
+
+message Empty{}
+
+message UserRes{
+    string Id = 1;
+    string first_name = 2;
+    string Email = 3;
+    string last_name = 4;
+    string phone_number = 5;
+    string Role = 6;
+}
+
+message EditProfileReqBpdy {
+    string first_name = 1;
+    string Email = 2;
+    string last_name = 3;
+    string phone_number = 4;
+}
+
+message ChangePasswordReq{
+    string Id = 1;
+    string CurrentPassword = 2;
+    string NewPassword = 3;
+}
+
+message ChangePasswordReqBody{
+    string CurrentPassword = 1;
+    string NewPassword = 2;
+}
+
+message SettingReq {
+    string Id = 1;
+    string PrivacyLevel = 2;
+    string Notification = 3;
+    string Language = 4;
+    string Theme = 5;
+}
+
+message Setting {
+    string PrivacyLevel = 1;
+    string Notification = 2;
+    string Language = 3;
+    string Theme = 4;
+}
